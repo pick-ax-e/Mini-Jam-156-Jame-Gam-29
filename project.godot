@@ -12,4 +12,4 @@ config_version=5
 
 config/name="Mini Jam 156 Jame Gam 29"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://resources/icon.svg"
