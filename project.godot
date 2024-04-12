@@ -13,3 +13,7 @@ config_version=5
 config/name="Mini Jam 156 Jame Gam 29"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://resources/icon.svg"
+
+[autoload]
+
+Singleton="*res://scripts/singleton.gd"
