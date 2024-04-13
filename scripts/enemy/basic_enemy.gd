@@ -22,7 +22,7 @@ var charge_position: Vector2
 # when in range, lunges towards the player?
 
 # Move/pathfind towards the plater
-func _movement(delta: float):
+func _movement(delta: float):	
 	if is_attacking:
 		return
 	
@@ -30,6 +30,11 @@ func _movement(delta: float):
 		return
 		
 	move_and_collide(position.direction_to(player.position) * speed * delta)
+
+func _cancel_attack():
+	attack_state = AttackState.NONE
+	current_charge_time = 0
+	is_attacking = false
 
 # Basic enemy can attack if it is within x units of the player
 func _can_attack() -> bool:
