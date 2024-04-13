@@ -15,7 +15,6 @@ var state = State.IDLE
 var is_attacking = false
 
 func _physics_process(delta: float):
-	print(Singleton.player_node)
 	#_movement(delta)
 	#
 	#if _can_attack():

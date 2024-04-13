@@ -23,8 +23,9 @@ func _movement(delta: float):
 	if is_attacking:
 		return
 	
-	if position.distance_to(player.position) <= range:
 	var player = Singleton.player_node
+	if position.distance_to(player.position) <= range:
+		pass
 	print(player)
 	
 	if global_position.distance_to(player.global_position) <= range:
