@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d26nxoa5ym6p8"]
+[gd_scene load_steps=32 format=3 uid="uid://d26nxoa5ym6p8"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_8721r"]
 [ext_resource type="Texture2D" uid="uid://bql70bt6pyive" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" id="2_onhck"]
@@ -209,6 +209,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_uuo0b"]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 1), -2.06178, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ij68b"]
+offsets = PackedFloat32Array(0, 0.0933333, 0.806667, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_61p66"]
 radius = 28.72
 height = 76.58
@@ -227,6 +235,31 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_1ptev")
 animation = &"IdleDown"
 autoplay = "IdleDown"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+show_behind_parent = true
+z_as_relative = false
+position = Vector2(0, 4.25)
+scale = Vector2(0.25, 0.25)
+skew = -0.0436332
+amount = 22
+lifetime = 1.62
+speed_scale = 2.94
+randomness = 1.0
+lifetime_randomness = 0.4
+emission_shape = 3
+emission_rect_extents = Vector2(15.32, 2.765)
+spread = 180.0
+gravity = Vector2(0, -1.775)
+initial_velocity_max = 10.95
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+radial_accel_min = -66.66
+radial_accel_max = 16.17
+scale_amount_min = 0.0
+scale_amount_max = 9.5
+scale_amount_curve = SubResource("Curve_uuo0b")
+color_ramp = SubResource("Gradient_ij68b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

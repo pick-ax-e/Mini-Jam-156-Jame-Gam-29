@@ -9,7 +9,7 @@ func hit_player(damage):
 	
 	player_health -= damage
 # above are intended for public use
-
+var particles: CPUParticles2D
 
 const accel = 50
 const friction = 0.925
@@ -37,6 +37,7 @@ var timedActionRemainingDuration = 0
 func _ready():
 	Singleton.player_node = self
 	animatedSprite = $AnimatedSprite2D
+	particles = $CPUParticles2D
 
 func _physics_process(delta):
 	handleTimedActions(delta)
@@ -87,13 +88,13 @@ func handlePlayerAnimations():
 			currentAction = 0
 		else:
 			currentAction = 1
-	
 	#THERE IS NO SWITCH STATEMENT IN THIS GOD AWFUL LANGUAGE>?>???? LORD HAVE MERCY GET ME OUT
 	#nevermind theres match, match deez??? deee
 	animatedSprite.modulate = Color.WHITE
 	match currentAction:
 		0:
-			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + animationStride]
+			
+			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + animationStride] 
 		1:
 			var bestFit: Vector2 = Vector2.ZERO
 			for dir in animationsDir:
