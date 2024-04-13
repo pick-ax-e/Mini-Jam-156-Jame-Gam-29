@@ -15,6 +15,7 @@ func reset(): #reset with animation
 	resetting = true
 	velocity = Vector2.ZERO
 	animatedSprite.modulate = Color(1,1,1,0.5)
+	initialResetSize = posOverTime.size()
 
 func quick_reset(): #no animation
 	var h = healthOverTime.pop_front()
@@ -65,6 +66,8 @@ const dashMaintain = 100
 const dashImpulse = 1500
 
 const resetTimeScale = 0.5 #negetive time scale in godot is weird, so i have avoided using it after testing
+const ResetDurationDesired = 2.0 #the amount of time the reset should take
+var initialResetSize = 0
 
 func _ready():
 	Singleton.player_node = self
@@ -100,8 +103,21 @@ func handleResetting():
 		animatedSprite.modulate = Color(1,1,1,1)
 		Singleton.reset()
 		return
-	var pos = posOverTime.pop_back()
-	var hlth = healthOverTime.pop_back()
+	
+	var pos
+	var hlth
+	var numFramesToSkip = ((initialResetSize /60)/ResetDurationDesired)
+	print("num to skip")
+	print(numFramesToSkip)
+	print("num in array")
+	print(posOverTime.size())
+	while numFramesToSkip > 0 && posOverTime.size() > 2: #skip frames 
+		pos = posOverTime.pop_back()
+		hlth = healthOverTime.pop_back()
+		numFramesToSkip-=1
+	
+	pos = posOverTime.pop_back()
+	hlth = healthOverTime.pop_back()
 	
 	player_health = hlth
 	position = pos
