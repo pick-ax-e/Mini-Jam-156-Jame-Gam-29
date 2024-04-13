@@ -21,4 +21,4 @@ func _on_timer_timeout():
 	emit_signal("Reset")
 
 func reset():
-	pass
+	get_tree().reload_current_scene()
