@@ -1,8 +1,9 @@
 class_name Player extends CharacterBody2D
 
-const accel = 100;
-const friction = 0.925;
-const noInputFriction = 0.8;
+const accel = 100
+const friction = 0.925
+const noInputFriction = 0.8
+const responsivenessMultiplier = 3
 var wishDir: Vector2 = Vector2.ZERO
 
 
@@ -23,8 +24,11 @@ func handlePlayerMovement():
 		velocity *= noInputFriction
 	else:
 		#calculate multiplier to make things more responsive in opisite directions
-		#var multi = float.dotProd velocity.normalized()
-		velocity += wishDir * accel
+		var multi = (wishDir * -1).dot( velocity.normalized() ) + 1.0
+		multi *= responsivenessMultiplier
+		multi +=1
+		print(multi)
+		velocity += wishDir * accel * multi
 		
 	velocity *= friction
 	move_and_slide()
