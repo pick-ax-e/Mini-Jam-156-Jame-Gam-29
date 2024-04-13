@@ -28,5 +28,3 @@ shape = SubResource("CapsuleShape2D_sr1yj")
 
 [node name="Enemy" parent="Area2D" instance=ExtResource("3_b3slm")]
 position = Vector2(-2, 200)
-health = 0.0
-attack_damage = 0.0
