@@ -107,10 +107,7 @@ func handleResetting():
 	var pos
 	var hlth
 	var numFramesToSkip = ((initialResetSize /60)/ResetDurationDesired)
-	print("num to skip")
-	print(numFramesToSkip)
-	print("num in array")
-	print(posOverTime.size())
+	
 	while numFramesToSkip > 0 && posOverTime.size() > 2: #skip frames 
 		pos = posOverTime.pop_back()
 		hlth = healthOverTime.pop_back()
