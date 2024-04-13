@@ -13,19 +13,19 @@ const responsivenessMultiplier = 3
 var wishDir: Vector2 = Vector2.ZERO
 var animatedSprite: AnimatedSprite2D
 
-var animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
-var animationNames = ["RunDown","RunLeft","RunRight","RunUp","IdleDown","IdleLeft","IdleRight","IdleUp"]
-var animationStride: int = 4 #total number of directions for animations
+const animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
+const animationNames = ["RunDown","RunLeft","RunRight","RunUp","IdleDown","IdleLeft","IdleRight","IdleUp"]
+const animationStride: int = 4 #total number of directions for animations
 
 var currentAction: int = 0 # 0 for idle, 1 for run, further actions are timedActions and their properties and implimentations are below
 var prevDir: Vector2 = Vector2.UP #used for determining idle directions
 
 #timed action system, used for attacks and possibly dashes/dodges in the future
-var timedActionNumber =         [2,3]   #refers to action number
-var timedActionDuration =       [0.25,1]#in secconds
-var timedActionDefaultCooldown =[0.25,2]
+const timedActionNumber =         [2,3]   #refers to action number
+const timedActionDuration =       [0.25,1]#in secconds
+const timedActionDefaultCooldown =[1,2]
+const timedActionAnimationPosition =  [3,4] #represents the index * stride
 var timedActionCooldown =       [0,0]
-var timedActionAnimationPosition =  [3,4] #represents the index * stride
 var timedActionRemainingDuration = 0
 
 func _ready():
@@ -40,6 +40,12 @@ func _physics_process(delta):
 	
 func handleTimedActions(delta):
 	# map inputs to action
+	var debug = 0
+	if debug == 1:
+		print(timedActionRemainingDuration)
+		print(timedActionCooldown)
+		print(currentAction)
+	
 	if currentAction >= 2 && timedActionRemainingDuration <= 0:
 		currentAction = 0 #finnish 
 
@@ -57,12 +63,12 @@ func handleTimedActions(delta):
 	
 	if timedActionRemainingDuration >= 0:
 		timedActionRemainingDuration -= delta
-	
-	if timedActionRemainingDuration > 0: #do not start performing an action if something else is doing the
 		return
 	
 	if timedActionCooldown[timedActionNumber.find(desiredAction)] <= 0:
 		#perform action
+		if desiredAction == -1:
+			return
 		var index = timedActionNumber.find(desiredAction)
 		currentAction = desiredAction
 		timedActionCooldown[index] = timedActionDefaultCooldown[index]
@@ -73,7 +79,7 @@ func handleTimedActions(delta):
 
 
 func handlePlayerAnimations():
-	if currentAction <= 1:
+	if currentAction == 1 || currentAction == 0:
 		if wishDir.length() == 0:
 			currentAction = 0
 		else:

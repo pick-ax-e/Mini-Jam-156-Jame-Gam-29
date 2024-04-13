@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://d26nxoa5ym6p8"]
+[gd_scene load_steps=28 format=3 uid="uid://d26nxoa5ym6p8"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_8721r"]
 [ext_resource type="Texture2D" uid="uid://bql70bt6pyive" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" id="2_onhck"]
-[ext_resource type="PackedScene" uid="uid://dqch1a4oqpfvh" path="res://scenes/user_interface.tscn" id="3_ecxld"]
+[ext_resource type="Texture2D" uid="uid://o1d8hl6yy4xf" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="3_6od3l"]
+[ext_resource type="PackedScene" path="res://scenes/user_interface.tscn" id="3_ecxld"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u3b3p"]
 radius = 63.2851
@@ -39,6 +40,26 @@ region = Rect2(0, 48, 48, 48)
 atlas = ExtResource("2_onhck")
 region = Rect2(48, 48, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_elbkj"]
+atlas = ExtResource("3_6od3l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_harmb"]
+atlas = ExtResource("3_6od3l")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_geod2"]
+atlas = ExtResource("3_6od3l")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovy84"]
+atlas = ExtResource("3_6od3l")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6aa5t"]
+atlas = ExtResource("3_6od3l")
+region = Rect2(32, 32, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6wad"]
 atlas = ExtResource("2_onhck")
 region = Rect2(96, 0, 48, 48)
@@ -73,6 +94,11 @@ region = Rect2(144, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1ptev"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"GAAAAA",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_igayj")
@@ -117,7 +143,22 @@ animations = [{
 "name": &"IdleUp",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elbkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_harmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_geod2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovy84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6aa5t")
+}],
 "loop": true,
 "name": &"Placeholder",
 "speed": 5.0
@@ -180,7 +221,7 @@ shape = SubResource("CircleShape2D_u3b3p")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_1ptev")
 animation = &"Placeholder"
-autoplay = "RunUp"
+autoplay = "Placeholder"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
