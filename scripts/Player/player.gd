@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 const accel = 100;
 const friction = 0.925;
-const noInputFriction = 0.925;
+const noInputFriction = 0.8;
 var wishDir: Vector2 = Vector2.ZERO
 
 
