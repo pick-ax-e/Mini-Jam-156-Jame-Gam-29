@@ -11,17 +11,36 @@ var animatedSprite: AnimatedSprite2D
 var animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
 var animationNames = ["RunDown","RunLeft","RunRight","RunUp","IdleDown","IdleLeft","IdleRight","IdleUp"]
 var animationStride: int = 4 #total number of directions for animations
-var currentAction: int = 0 # 0 for idle, 1 for run, 2 for attck 1, this var is used for using the right animation
+var currentAction: int = 0 # 0 for idle, 1 for run, further actions are timedActions and their properties and implimentations are below
 var prevDir: Vector2 = Vector2.UP
+
+#timed action system, used for attacks and possibly dashes/dodges in the future
+var timedActionNumber =         [2,3]   #refers to action number
+var timedActionDuration =       [0.25,1]#in secconds
+var timedActionDefaultCooldown =[0.25,2]
+var timedActionCooldown =       [0,0]
 
 func _ready():
 	Singleton.player_node = self
 	animatedSprite = $AnimatedSprite2D
 
 func _physics_process(delta):
-	#handlePlayerAttacks()
+	handleTimedActions()
 	handlePlayerMovement()
 	handlePlayerAnimations()
+	
+	
+func handleTimedActions():
+	#first map inputs to action
+	var desiredAction: int = -1
+	if Input.action_press("attack1"):
+		desiredAction = timedActionNumber[0]
+	if Input.action_press("attack2")
+		desiredAction = timedActionNumber[1]
+	
+		
+
+
 
 func handlePlayerAnimations():
 	if currentAction != 2:
