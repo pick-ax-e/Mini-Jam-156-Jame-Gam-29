@@ -26,12 +26,12 @@ func _ready():
 	animatedSprite = $AnimatedSprite2D
 
 func _physics_process(delta):
-	handleTimedActions()
+	handleTimedActions(delta)
 	handlePlayerMovement()
 	handlePlayerAnimations()
 	
 	
-func handleTimedActions():
+func handleTimedActions(delta):
 	#first map inputs to action
 	var desiredAction: int = -1
 	if Input.is_action_pressed("attack1"):
@@ -39,6 +39,13 @@ func handleTimedActions():
 		
 	if Input.is_action_pressed("attack2"):
 		desiredAction = timedActionNumber[1]
+	
+	#decrease cooldowns
+	for i in range(timedActionCooldown.size()): #WHAT THE HELL IS THIS SHIT, THIS IS NOT THE FOR LOOP I KNOW AND LOVE
+		if timedActionCooldown[i] > 0:          #I CANT BELIEVE IM SAYING THIS BUT I ACTUALLY MISS JAVA
+			timedActionCooldown[i]-=delta       #TAKE ME HOME COUNTR TORAAAD TO HE PLACE WHWER BLENONNGGG WEST VERTINGA
+	
+	
 	
 		
 
