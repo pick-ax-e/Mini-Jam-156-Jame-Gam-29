@@ -11,7 +11,7 @@ func hit_player(damage):
 
 var resetting:bool = false
 
-func reset(): #oh my god gds DOESNT SUPPORT STRUCTS EITHER
+func reset(): #reset with animation
 	resetting = true
 	velocity = Vector2.ZERO
 	animatedSprite.modulate = Color(1,1,1,0.5)
