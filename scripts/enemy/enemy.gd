@@ -43,10 +43,7 @@ func _physics_process(delta: float):
 # Handles the movement of an enemy
 func move_to_target(delta: float):
 	if navigation_agent.is_navigation_finished() || is_attacking:
-		print("Test")
-		navigation_agent.set_velocity_forced(Vector2.ZERO)
-		velocity = Vector2.ZERO
-		#move_and_slide()
+		navigation_agent.velocity = Vector2.ZERO
 		return
 		
 	var target = navigation_agent.get_next_path_position()

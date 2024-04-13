@@ -14,8 +14,8 @@ range = 100
 lunge_speed = 1000.0
 lunge_distance = 300.0
 type = "Basic"
-health = 10
-attack_damage = 10
+health = 10.0
+attack_damage = 10.0
 speed = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
