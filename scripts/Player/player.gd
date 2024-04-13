@@ -16,7 +16,6 @@ func reset(): #reset with animation
 	velocity = Vector2.ZERO
 	animatedSprite.modulate = Color(1,1,1,0.5)
 	initialResetSize = posOverTime.size()
-
 func quick_reset(): #no animation
 	var h = healthOverTime.pop_front()
 	var p = posOverTime.pop_front()
@@ -30,10 +29,8 @@ func quick_reset(): #no animation
 	resetting = false
 	velocity = Vector2.ZERO
 	animatedSprite.modulate = Color(1,1,1,1)
-	
-	
 
-# above are intended for public use
+# above are intended for public use ==========================================================
 var healthOverTime:Array = []
 var posOverTime: Array = []
 
@@ -69,12 +66,18 @@ const resetTimeScale = 0.5 #negetive time scale in godot is weird, so i have avo
 const ResetDurationDesired = 2.0 #the amount of time the reset should take
 var initialResetSize = 0
 
+var weaponHitbox: player_hitbox
+const weaponDamage = 30
+
 func _ready():
 	Singleton.player_node = self
 	animatedSprite = $AnimatedSprite2D
 	particles = $CPUParticles2D
 	posOverTime.append(position)
 	healthOverTime.append(player_health)
+	weaponHitbox = get_child(3) #get weapon hitbox, idk $ would not work i hate this
+
+
 
 func _physics_process(delta):
 	if resetting:
@@ -183,13 +186,15 @@ func handlePlayerAnimations():
 			animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
 			prevDir = bestFit
 		2:
-			animatedSprite.animation = "Placeholder"
+			animatedSprite.animation = "Placeholder" #attack
+			weaponHitbox.updateRot(prevDir)
+			weaponHitbox.tickHitbox(weaponDamage)
 		3:
-			animatedSprite.animation = "Placeholder"
+			animatedSprite.animation = "Placeholder" # dash
 			if wishDir != Vector2.ZERO:
 				velocity += wishDir * dashMaintain
 		4:
-			animatedSprite.modulate = Color.RED
+			animatedSprite.modulate = Color.RED # damage
 
 func handlePlayerMovement():
 	wishDir.x = Input.get_axis("move_left","move_right")

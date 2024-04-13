@@ -1,16 +1,15 @@
-extends ShapeCast2D
-var hitbox: ShapeCast2D
+class_name player_hitbox extends ShapeCast2D
 const length = 100;
-var hits
-func _ready():
-	hitbox = $Hitbox1
 func updateRot(vec2Dir:Vector2):
-	hitbox.target_position = vec2Dir.normalized() * length
+	if vec2Dir != null:
+		target_position = vec2Dir.normalized() * length
 
-#func _physics_process(delta):
-	#hits = hitbox.collision_result
-	#for hit in hits:
-		#if hit is Enemy:
-			#var enemy: Enemy = hit
-			
-	
+func tickHitbox(damage):
+	var hits = collision_result
+	print("hit size")
+	print(hits.size())
+	for hit in hits:
+		if hit is Enemy:
+			print("fella has been hit")
+			hit.take_damage(damage)
+
