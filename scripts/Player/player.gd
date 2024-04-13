@@ -45,7 +45,7 @@ var wishDir: Vector2 = Vector2.ZERO
 var animatedSprite: AnimatedSprite2D
 
 const animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
-const animationNames = ["RunDown","RunLeft","RunRight","RunUp","IdleDown","IdleLeft","IdleRight","IdleUp"]
+const animationNames = ["RunDown","RunLeft","RunRight","RunUp","IdleDown","IdleLeft","IdleRight","IdleUp","AttackDown","AttackLeft","AttackRight","AttackUp"]
 const animationStride: int = 4 #total number of directions for animations
 
 var currentAction: int = 0 # 0 for idle, 1 for run, further actions are timedActions and their properties and implimentations are below
@@ -176,8 +176,7 @@ func handlePlayerAnimations():
 	animatedSprite.modulate = Color.WHITE
 	match currentAction:
 		0:
-			
-			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + animationStride] 
+			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + (animationStride * 1)] 
 		1:
 			var bestFit: Vector2 = Vector2.ZERO
 			for dir in animationsDir:
@@ -189,6 +188,8 @@ func handlePlayerAnimations():
 			animatedSprite.animation = "Placeholder" #attack
 			weaponHitbox.updateRot(prevDir)
 			weaponHitbox.tickHitbox(weaponDamage)
+			
+			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + (animationStride * 2)] 
 		3:
 			animatedSprite.animation = "Placeholder" # dash
 			if wishDir != Vector2.ZERO:
