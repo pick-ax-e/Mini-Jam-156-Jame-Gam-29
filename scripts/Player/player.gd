@@ -8,10 +8,11 @@ func hit_player(damage):
 	timedActionRemainingDuration = timedActionDuration[index]
 	
 	player_health -= damage
+	
 # above are intended for public use
 var particles: CPUParticles2D
 
-const accel = 50
+const accel = 40
 const friction = 0.925
 const noInputFriction = 0.8
 const responsivenessMultiplier = 3
@@ -28,11 +29,14 @@ var prevDir: Vector2 = Vector2.UP #used for determining idle directions
 
 #timed action system, used for attacks and possibly dashes/dodges in the future
 const timedActionNumber =         [2,3,4]   #refers to action number
-const timedActionDuration =       [0.25,1,0.25]#in secconds
+const timedActionDuration =       [0.25,0.125,0.25]#in secconds
 const timedActionDefaultCooldown =[1,2,0]
 const timedActionAnimationPosition =  [3,4,5] #represents the index * stride
 var timedActionCooldown =       [0,0,0]
 var timedActionRemainingDuration = 0
+
+const dashMaintain = 100
+const dashImpulse = 1500
 
 func _ready():
 	Singleton.player_node = self
@@ -60,7 +64,7 @@ func handleTimedActions(delta):
 	if Input.is_action_pressed("attack1"):
 		desiredAction = timedActionNumber[0]
 		
-	if Input.is_action_pressed("attack2"):
+	if Input.is_action_pressed("special"):
 		desiredAction = timedActionNumber[1]
 	
 	#decrease cooldowns
@@ -80,6 +84,12 @@ func handleTimedActions(delta):
 		currentAction = desiredAction
 		timedActionCooldown[index] = timedActionDefaultCooldown[index]
 		timedActionRemainingDuration = timedActionDuration[index]
+	else :
+		return
+		
+	match currentAction:
+		3:
+			velocity = wishDir*dashImpulse
 
 
 func handlePlayerAnimations():
@@ -106,6 +116,8 @@ func handlePlayerAnimations():
 			animatedSprite.animation = "Placeholder"
 		3:
 			animatedSprite.animation = "Placeholder"
+			if wishDir != Vector2.ZERO:
+				velocity += wishDir * dashMaintain
 		4:
 			animatedSprite.modulate = Color.RED
 
