@@ -23,10 +23,12 @@ func _movement(delta: float):
 	if is_attacking:
 		return
 	
-	if position.distance_to(player.position) <= range:
+	if global_position.distance_to(player.global_position) <= range:
 		return
-		
-	move_and_collide(position.direction_to(player.position) * speed * delta)
+	
+	velocity = global_position.direction_to(player.global_position) * speed * delta
+	
+	move_and_slide()
 
 # Basic enemy can attack if it is within x units of the player
 func _can_attack() -> bool:
