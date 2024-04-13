@@ -3,12 +3,15 @@ extends Enemy
 
 enum AttackState { NONE, CHARGING, LUNGING, RECHARGING }
 
+@onready var player = Singleton.player_node
+
 @export_category("Attack Settings")
 @export var range = 50
 @export var charge_time: float = 1
 @export var lunge_speed: float = 100
 @export var lunge_distance: float = 100
 @export var recharge_time: float = 1
+
 
 var attack_state = AttackState.NONE
 var current_charge_time = 0
@@ -22,11 +25,6 @@ var charge_position: Vector2
 func _movement(delta: float):
 	if is_attacking:
 		return
-	
-	var player = Singleton.player_node
-	if position.distance_to(player.position) <= range:
-		pass
-	print(player)
 	
 	if global_position.distance_to(player.global_position) <= range:
 		return

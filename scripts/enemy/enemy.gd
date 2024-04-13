@@ -15,14 +15,13 @@ var state = State.IDLE
 var is_attacking = false
 
 func _physics_process(delta: float):
-	#_movement(delta)
-	#
-	#if _can_attack():
-		#is_attacking = true
-		#
-	#if is_attacking:
-		#_do_attack(delta)
-	pass
+	_movement(delta)
+	
+	if _can_attack():
+		is_attacking = true
+		
+	if is_attacking:
+		_do_attack(delta)
 
 # Handles the movement of an enemy
 func _movement(delta: float):
