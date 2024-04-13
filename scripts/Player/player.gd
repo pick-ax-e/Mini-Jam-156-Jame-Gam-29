@@ -1,6 +1,8 @@
 class_name Player extends CharacterBody2D
 var player_health = 100
-#vars above are intended for public use
+func hit_player(damage):
+	print("not implimented yet, will probs add a stun or smth")
+# above are intended for public use
 
 
 const accel = 50
