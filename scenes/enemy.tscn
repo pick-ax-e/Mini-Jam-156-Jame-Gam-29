@@ -24,3 +24,7 @@ shape = SubResource("CircleShape2D_rs0qx")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(20, 20)
 texture = SubResource("PlaceholderTexture2D_pf4yc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true

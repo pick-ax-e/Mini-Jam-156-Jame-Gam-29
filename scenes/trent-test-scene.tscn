@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2i8jsntlxit1"]
+
+[ext_resource type="PackedScene" uid="uid://dpqu4xqu1txpw" path="res://scenes/player.tscn" id="1_3hwon"]
+[ext_resource type="PackedScene" uid="uid://hik6w44brocv" path="res://scenes/map.tscn" id="2_jj82g"]
+[ext_resource type="PackedScene" uid="uid://ce5gsclhrc62b" path="res://scenes/enemy.tscn" id="3_b3slm"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_region.gd" id="3_gadcp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sr1yj"]
+radius = 500.0
+height = 1000.0
+
+[node name="Main" type="Node2D"]
+texture_filter = 1
+
+[node name="Player" parent="." instance=ExtResource("1_3hwon")]
+position = Vector2(6, -382)
+
+[node name="Map" parent="." instance=ExtResource("2_jj82g")]
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("enemies")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_gadcp")
+enemies = [NodePath("Enemy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_sr1yj")
+
+[node name="Enemy" parent="Area2D" instance=ExtResource("3_b3slm")]
+position = Vector2(-2, 46)
