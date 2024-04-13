@@ -11,8 +11,9 @@ func hit_player(damage):
 
 var resetting:bool = false
 
-func reset() #oh my god IT DOESNT SUPPORT STRUCTS EITHER
+func reset(): #oh my god IT DOESNT SUPPORT STRUCTS EITHER
 	resetting = true
+	velocity = Vector2.ZERO
 
 # above are intended for public use
 var healthOverTime:Array = []
@@ -61,9 +62,18 @@ func _physics_process(delta):
 	handleTimedActions(delta)
 	handlePlayerMovement()
 	handlePlayerAnimations()
+	posOverTime.append(position)
+	healthOverTime.append(player_health)
 	
 func handleResetting():
-	print("buh")
+	if posOverTime.size() < 1:
+		resetting = false
+		return
+	var pos = posOverTime.pop_front()
+	var hlth = healthOverTime.pop_front()
+	
+	player_health = hlth
+	position = pos
 
 func handleTimedActions(delta):
 	# map inputs to action
