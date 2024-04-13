@@ -163,6 +163,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_8721r")
@@ -180,4 +181,3 @@ autoplay = "RunUp"
 position_smoothing_enabled = true
 
 [node name="UI" parent="Camera2D" instance=ExtResource("3_ecxld")]
-visible = false
