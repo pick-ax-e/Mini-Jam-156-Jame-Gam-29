@@ -3,15 +3,15 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect("Update timer", update)
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	update()
 
 
-func update(time_left):
+func update():
+	var time_left = int(Singleton.time_left)
 	var minutes = int(time_left / 60)
 	var seconds = int(time_left % 60)
 	
