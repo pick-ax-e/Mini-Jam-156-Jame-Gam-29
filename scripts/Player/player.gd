@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 const accel = 100;
 const friction = 0.925;
@@ -6,7 +6,8 @@ const noInputFriction = 0.925;
 var wishDir: Vector2 = Vector2.ZERO
 
 
-
+func _ready():
+	Singleton.player_node = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta):
 	handlePlayerMovement()
