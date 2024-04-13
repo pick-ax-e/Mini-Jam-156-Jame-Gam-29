@@ -8,8 +8,16 @@ func hit_player(damage):
 	timedActionRemainingDuration = timedActionDuration[index]
 	
 	player_health -= damage
-	
+
+var resetting:bool = false
+
+func reset() #oh my god IT DOESNT SUPPORT STRUCTS EITHER
+	resetting = true
+
 # above are intended for public use
+var healthOverTime:Array = []
+var posOverTime: Array = []
+
 var particles: CPUParticles2D
 
 const accel = 40
@@ -43,12 +51,20 @@ func _ready():
 	animatedSprite = $AnimatedSprite2D
 	particles = $CPUParticles2D
 
+func _process(delta):
+	if resetting:
+		handleResetting()
+
 func _physics_process(delta):
+	if resetting:
+		return
 	handleTimedActions(delta)
 	handlePlayerMovement()
 	handlePlayerAnimations()
 	
-	
+func handleResetting():
+	print("buh")
+
 func handleTimedActions(delta):
 	# map inputs to action
 	var debug = 0

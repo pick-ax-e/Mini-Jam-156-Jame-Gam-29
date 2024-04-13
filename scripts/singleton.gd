@@ -24,4 +24,5 @@ func _on_timer_timeout():
 
 func reset():
 	#play time loop animation here
+	player_node.reset() # i can do this through the player
 	get_tree().reload_current_scene()
