@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ce5gsclhrc62b" path="res://scenes/enemy.tscn" id="3_ygrr7"]
 
 [node name="Main" type="Node2D"]
+texture_filter = 1
 
 [node name="Player" parent="." instance=ExtResource("1_w3ncm")]
 position = Vector2(61, -95)
