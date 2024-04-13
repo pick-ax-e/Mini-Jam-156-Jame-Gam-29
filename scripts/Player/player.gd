@@ -68,7 +68,6 @@ func handleTimedActions(delta):
 	if timedActionCooldown[timedActionNumber.find(desiredAction)] <= 0:
 		#perform action
 		if desiredAction == -1:
-			print("action did not work")
 			return
 		var index = timedActionNumber.find(desiredAction)
 		currentAction = desiredAction
