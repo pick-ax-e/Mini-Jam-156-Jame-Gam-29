@@ -29,14 +29,17 @@ func handlePlayerAnimations():
 		else:
 			currentAction = 1
 	
-	
+	#THERE IS NO SWITCH STATEMENT IN THIS GOD AWFUL LANGUAGE>?>???? LORD HAVE MERCY GET ME OUT
+	if currentAction == 0:
+		animatedSprite.animation = "default"
+	elif currentAction == 1:
 	#find the correct animation to use FOR RUNNING
-	var bestFit: Vector2 = Vector2.ZERO
-	for dir in animationsDir:
-		if dir.dot(wishDir) > bestFit.dot(wishDir):
-			bestFit = dir
+		var bestFit: Vector2 = Vector2.ZERO
+		for dir in animationsDir:
+			if dir.dot(wishDir) > bestFit.dot(wishDir):
+				bestFit = dir
 	
-	animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
+		animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
 	
 	
 
