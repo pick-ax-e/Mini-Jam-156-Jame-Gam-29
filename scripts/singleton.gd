@@ -21,4 +21,5 @@ func _on_timer_timeout():
 	emit_signal("Reset")
 
 func reset():
+	#play time loop animation here
 	get_tree().reload_current_scene()

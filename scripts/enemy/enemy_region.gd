@@ -1,9 +1,14 @@
 class_name EnemyRegion
 extends Area2D
 
-@export var enemies: Array[Enemy]
+var enemies: Array[Enemy]
 
 var is_active = false
+
+func _ready():
+	for child in get_children():
+		if child is Enemy:
+			enemies.append(child)
 
 # unsure if checks and loops are expensive, can check every x steps if needed
 func _physics_process(delta: float) -> void:
