@@ -1,24 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1aod5i8fbmee"]
+[gd_scene load_steps=5 format=3 uid="uid://cpcirvqynqice"]
 
 [ext_resource type="PackedScene" uid="uid://ce5gsclhrc62b" path="res://scenes/enemy.tscn" id="1_jkmfr"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_region.gd" id="1_rswir"]
+[ext_resource type="PackedScene" uid="uid://d26nxoa5ym6p8" path="res://scenes/player.tscn" id="3_7ffeh"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ah7a2"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x0xko"]
+radius = 488.58
+height = 977.26
 
 [node name="Trent-testing-scene" type="Node2D"]
 
-[node name="Enemy" parent="." instance=ExtResource("1_jkmfr")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="test_player" type="CharacterBody2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(186, 97)
-collision_layer = 4
-collision_mask = 3
-motion_mode = 1
+[node name="enemy_region" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_rswir")
 
-[node name="temp_Polygon2D" type="Polygon2D" parent="test_player"]
-polygon = PackedVector2Array(-10, -10, -10, 10, 10, 10, 10, -10)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_region"]
+shape = SubResource("CapsuleShape2D_x0xko")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="test_player"]
-shape = SubResource("CircleShape2D_ah7a2")
+[node name="Enemy" parent="enemy_region" instance=ExtResource("1_jkmfr")]
+
+[node name="player" parent="." instance=ExtResource("3_7ffeh")]
+position = Vector2(161, 87)
