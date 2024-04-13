@@ -5,13 +5,6 @@ extends Area2D
 
 var is_active = false
 
-func _ready() -> void:
-	var collider = $CollisionShape2D
-	collider.shape
-	#for enemy in enemies:
-		#enemy.bounds = 
-	pass
-
 # unsure if checks and loops are expensive, can check every x steps if needed
 func _physics_process(delta: float) -> void:
 	var bodies = get_overlapping_bodies()
@@ -35,5 +28,3 @@ func _physics_process(delta: float) -> void:
 		is_active = false
 		for enemy in enemies:
 			enemy.state = Enemy.State.IDLE
-
-	# ensure enemies cannot leave the area? (lunge attacks?)

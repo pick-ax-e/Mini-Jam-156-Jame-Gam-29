@@ -9,12 +9,20 @@ enum State { IDLE, ACTIVE }
 @export var attack_damage: int
 @export var speed: float
 
-var region: EnemyRegion
+@onready var start_position = global_position
 
 var state = State.IDLE
 var is_attacking = false
 
 func _physics_process(delta: float):
+	if state == State.IDLE:
+		if is_attacking:
+			_cancel_attack()
+		
+		if global_position.distance_to(start_position) > 1:
+			move_and_collide(global_position.direction_to(start_position) * speed * delta)
+		return
+	
 	_movement(delta)
 	
 	if _can_attack():
@@ -22,6 +30,9 @@ func _physics_process(delta: float):
 		
 	if is_attacking:
 		_do_attack(delta)
+		
+func _cancel_attack():
+	pass
 
 # Handles the movement of an enemy
 func _movement(delta: float):
