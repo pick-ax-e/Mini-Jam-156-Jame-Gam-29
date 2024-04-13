@@ -10,7 +10,6 @@ signal reset_signal
 func _ready():
 	timer = Timer.new()
 	add_child(timer)
-	timer.start(300)
 	timer.timeout.connect(_on_timer_timeout)
 
 
