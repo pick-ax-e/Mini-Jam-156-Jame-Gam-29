@@ -58,7 +58,6 @@ func move_to_target(delta: float):
 		_on_velocity_computed(new_velocity)
 
 func _on_velocity_computed(safe_velocity: Vector2):
-	print("test")
 	velocity = safe_velocity
 	move_and_slide()
 
