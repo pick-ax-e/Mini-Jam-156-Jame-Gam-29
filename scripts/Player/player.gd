@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody2D
 
-const accel = 100
+const accel = 50
 const friction = 0.925
 const noInputFriction = 0.8
 const responsivenessMultiplier = 3
@@ -65,8 +65,5 @@ func handlePlayerMovement():
 		velocity += wishDir * accel * multi
 		
 	velocity *= friction
-	
-	
-	#now figure out rotation of the player
 	move_and_slide()
 	
