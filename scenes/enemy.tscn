@@ -265,10 +265,6 @@ animations = [{
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_6jdg1")
-range = 250
-charge_time = 0.5
-lunge_speed = 2000.0
-lunge_distance = 500.0
 type = "Basic"
 health = 10.0
 attack_damage = 10.0
@@ -329,3 +325,10 @@ offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.960784, 0.396078, 0.396078, 1)
+
+[node name="attack_timer" type="Timer" parent="."]
+
+[node name="targetting_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="targetting_timer" to="." method="_on_targetting_timer_timeout"]
