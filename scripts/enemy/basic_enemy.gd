@@ -21,7 +21,7 @@ const ANIMATION_DIRECTION_MAP = {
 }
 
 @export_category("Attack Settings")
-@export var range = 250
+@export var attack_range = 250
 @export var charge_time: float = 0.5
 @export var lunge_time: float = 0.25
 @export var recharge_time: float = 1
@@ -83,7 +83,7 @@ func _cancel_attack():
 
 # Basic enemy can attack if it is within x units of the player
 func _can_attack() -> bool:
-	return global_position.distance_to(player.global_position) <= range && !is_attacking
+	return global_position.distance_to(player.global_position) <= attack_range && !is_attacking
 
 # charges up lunge, then captures the direction to the player and lunges towards them
 func _do_attack(delta: float):
