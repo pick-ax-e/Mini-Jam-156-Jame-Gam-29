@@ -13,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	emit_signal("Update timer", timer.time_left)
 
 func _on_timer_timeout():
 	reset()

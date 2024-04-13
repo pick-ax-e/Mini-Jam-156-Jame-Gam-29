@@ -11,14 +11,14 @@ func _ready():
 	Singleton.player_node = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta):
-	handlePlayerAttacks()
+	#handlePlayerAttacks()
 	handlePlayerMovement()
-	handlePlayerAnimations()
+	#handlePlayerAnimations()
 
-func handlePlayerAnimations
+#func handlePlayerAnimation():
 	
 
-func handlePlayerAttacks
+#func handlePlayerAttacks():
 	
 
 func handlePlayerMovement():
