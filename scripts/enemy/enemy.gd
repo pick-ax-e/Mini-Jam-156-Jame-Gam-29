@@ -9,8 +9,10 @@ enum State { IDLE, ACTIVE }
 @export var attack_damage: float
 @export var speed: float
 
+@onready var health_bar: ColorRect = $hp/fill
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var start_position = global_position
+@onready var max_health = health
 
 var state = State.IDLE
 var is_attacking = false
@@ -18,6 +20,9 @@ var target_position: Vector2
 
 func _ready():
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+
+func _process(delta: float) -> void:
+	health_bar.scale = Vector2(clampf(health / max_health, 0, 1), 1)
 
 func _physics_process(delta: float):
 	if state == State.IDLE:
@@ -38,7 +43,6 @@ func _physics_process(delta: float):
 		
 	if is_attacking:
 		_do_attack(delta)
-		
 
 # Handles the movement of an enemy
 func move_to_target(delta: float):

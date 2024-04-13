@@ -54,6 +54,7 @@ func get_animation_name() -> String:
 	return animation_state_to_string(animation_state) + "_" + animation_direction_to_string(animation_direction)
 
 func _process(delta: float) -> void:
+	super._process(delta)
 	if velocity.dot(Vector2.RIGHT) > 0.5:
 		animation_direction = AnimationDirection.RIGHT
 	elif velocity.dot(Vector2.UP) > 0.5:
