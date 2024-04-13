@@ -19,9 +19,18 @@ var is_attacking = false
 var target_position: Vector2
 
 func _ready():
+	set_physics_process(false)
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+	call_deferred("_nav_setup")
 
-func _process(delta: float) -> void:
+func _nav_setup():
+	NavigationServer2D.map_changed.connect(Callable(_nav_ready))
+
+func _nav_ready(_rid):
+	set_physics_process(true)
+	NavigationServer2D.map_changed.disconnect(Callable(_nav_ready))
+
+func _process(_delta: float) -> void:
 	health_bar.scale = Vector2(clampf(health / max_health, 0, 1), 1)
 
 func _physics_process(delta: float):
@@ -45,7 +54,7 @@ func _physics_process(delta: float):
 		_do_attack(delta)
 
 # Handles the movement of an enemy
-func move_to_target(delta: float):
+func move_to_target(_delta: float):
 	if navigation_agent.is_navigation_finished() || is_attacking:
 		navigation_agent.velocity = Vector2.ZERO
 		return
@@ -73,8 +82,8 @@ func _can_attack() -> bool:
 	return false
 
 # perform the attack
-func _do_attack(delta: float) -> void:
+func _do_attack(_delta: float) -> void:
 	pass
 
-func take_damage(damage: float):
+func take_damage(_damage: float):
 	pass

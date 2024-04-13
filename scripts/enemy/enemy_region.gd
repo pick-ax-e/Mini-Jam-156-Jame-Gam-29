@@ -11,7 +11,7 @@ func _ready():
 			enemies.append(child)
 
 # unsure if checks and loops are expensive, can check every x steps if needed
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var bodies = get_overlapping_bodies()
 	
 	var contains_player = false
