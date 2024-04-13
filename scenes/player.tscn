@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d26nxoa5ym6p8"]
+[gd_scene load_steps=22 format=3 uid="uid://d26nxoa5ym6p8"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_8721r"]
 [ext_resource type="Texture2D" uid="uid://bql70bt6pyive" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" id="2_onhck"]
@@ -6,6 +6,38 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u3b3p"]
 radius = 63.2851
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igayj"]
+atlas = ExtResource("2_onhck")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkus8"]
+atlas = ExtResource("2_onhck")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pbvt"]
+atlas = ExtResource("2_onhck")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t0it"]
+atlas = ExtResource("2_onhck")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_275p0"]
+atlas = ExtResource("2_onhck")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoaad"]
+atlas = ExtResource("2_onhck")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4h5e"]
+atlas = ExtResource("2_onhck")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_345dq"]
+atlas = ExtResource("2_onhck")
+region = Rect2(48, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6wad"]
 atlas = ExtResource("2_onhck")
@@ -41,6 +73,50 @@ region = Rect2(144, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1ptev"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igayj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkus8")
+}],
+"loop": true,
+"name": &"IdleDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pbvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t0it")
+}],
+"loop": true,
+"name": &"IdleLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_275p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoaad")
+}],
+"loop": true,
+"name": &"IdleRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4h5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_345dq")
+}],
+"loop": true,
+"name": &"IdleUp",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o6wad")
@@ -84,11 +160,6 @@ animations = [{
 "loop": true,
 "name": &"RunUp",
 "speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -102,7 +173,7 @@ shape = SubResource("CircleShape2D_u3b3p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(6.425, 6.425)
 sprite_frames = SubResource("SpriteFrames_1ptev")
-animation = &"RunUp"
+animation = &"IdleUp"
 autoplay = "RunUp"
 
 [node name="Camera2D" type="Camera2D" parent="."]

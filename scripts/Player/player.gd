@@ -9,9 +9,10 @@ var wishDir: Vector2 = Vector2.ZERO
 var animatedSprite: AnimatedSprite2D
 
 var animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
-var animationNames = ["RunDown","RunLeft","RunRight","RunUp"]
-
+var animationNames = ["RunDown","RunLeft","RunRight","RunUp","IdleDown","IdleLeft","IdleRight","IdleUp"]
+var animationStride: int = 4 #total number of directions for animations
 var currentAction: int = 0 # 0 for idle, 1 for run, 2 for attck 1, this var is used for using the right animation
+var prevDir: Vector2 = Vector2.UP
 
 func _ready():
 	Singleton.player_node = self
@@ -30,8 +31,10 @@ func handlePlayerAnimations():
 			currentAction = 1
 	
 	#THERE IS NO SWITCH STATEMENT IN THIS GOD AWFUL LANGUAGE>?>???? LORD HAVE MERCY GET ME OUT
+	
+	
 	if currentAction == 0:
-		animatedSprite.animation = "default"
+		animatedSprite.animation = animationNames[animationsDir.find(prevDir) + animationStride]
 	elif currentAction == 1:
 	#find the correct animation to use FOR RUNNING
 		var bestFit: Vector2 = Vector2.ZERO
@@ -40,6 +43,7 @@ func handlePlayerAnimations():
 				bestFit = dir
 	
 		animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
+		prevDir = bestFit
 	
 	
 
