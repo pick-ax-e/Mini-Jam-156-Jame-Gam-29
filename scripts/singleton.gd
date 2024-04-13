@@ -23,6 +23,7 @@ func _on_timer_timeout():
 	reset_signal.emit()
 
 func reset():
-	#play time loop animation here
-	player_node.reset() # i can do this through the player
+	#quick note regarding player_node.reset()
+	#if you want the full animation to play out before the full reset, call playernode.reset() and that only, it will call the full reset when the animation is done
+	player_node.reset() 
 	get_tree().reload_current_scene()

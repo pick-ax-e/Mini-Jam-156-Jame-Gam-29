@@ -16,6 +16,22 @@ func reset(): #oh my god gds DOESNT SUPPORT STRUCTS EITHER
 	velocity = Vector2.ZERO
 	animatedSprite.modulate = Color(1,1,1,0.5)
 
+func quick_reset(): #no animation
+	var h = healthOverTime.pop_front()
+	var p = posOverTime.pop_front()
+	healthOverTime.clear()
+	posOverTime.clear()
+	healthOverTime.append(h)
+	posOverTime.append(p)
+	
+	player_health = h
+	position = p
+	resetting = false
+	velocity = Vector2.ZERO
+	animatedSprite.modulate = Color(1,1,1,1)
+	
+	
+
 # above are intended for public use
 var healthOverTime:Array = []
 var posOverTime: Array = []
