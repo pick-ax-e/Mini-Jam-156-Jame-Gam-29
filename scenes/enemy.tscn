@@ -16,7 +16,7 @@ lunge_distance = 300.0
 type = "Basic"
 health = 10
 attack_damage = 10
-speed = 150.0
+speed = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rs0qx")
