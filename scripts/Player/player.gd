@@ -11,8 +11,9 @@ var animatedSprite: AnimatedSprite2D
 var animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
 var animationNames = ["RunDown","RunLeft","RunRight","RunUp","IdleDown","IdleLeft","IdleRight","IdleUp"]
 var animationStride: int = 4 #total number of directions for animations
+
 var currentAction: int = 0 # 0 for idle, 1 for run, further actions are timedActions and their properties and implimentations are below
-var prevDir: Vector2 = Vector2.UP
+var prevDir: Vector2 = Vector2.UP #used for determining idle directions
 
 #timed action system, used for attacks and possibly dashes/dodges in the future
 var timedActionNumber =         [2,3]   #refers to action number
@@ -33,9 +34,10 @@ func _physics_process(delta):
 func handleTimedActions():
 	#first map inputs to action
 	var desiredAction: int = -1
-	if Input.action_press("attack1"):
+	if Input.is_action_pressed("attack1"):
 		desiredAction = timedActionNumber[0]
-	if Input.action_press("attack2")
+		
+	if Input.is_action_pressed("attack2"):
 		desiredAction = timedActionNumber[1]
 	
 		
