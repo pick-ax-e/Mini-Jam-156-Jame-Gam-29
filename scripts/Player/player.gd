@@ -1,4 +1,7 @@
 class_name Player extends CharacterBody2D
+var player_health = 100
+#vars above are intended for public use
+
 
 const accel = 50
 const friction = 0.925
@@ -20,6 +23,7 @@ var timedActionNumber =         [2,3]   #refers to action number
 var timedActionDuration =       [0.25,1]#in secconds
 var timedActionDefaultCooldown =[0.25,2]
 var timedActionCooldown =       [0,0]
+var timedActionAnimationName =  ["null","null"]
 var timedActionRemainingDuration = 0
 
 func _ready():
@@ -33,7 +37,7 @@ func _physics_process(delta):
 	
 	
 func handleTimedActions(delta):
-	#first map inputs to action
+	# map inputs to action
 	var desiredAction: int = -1
 	if Input.is_action_pressed("attack1"):
 		desiredAction = timedActionNumber[0]
@@ -49,7 +53,10 @@ func handleTimedActions(delta):
 	if timedActionRemainingDuration >= 0:
 		timedActionRemainingDuration -= delta
 	
-	if timedActionCooldown[timedActionNumber.find(desiredAction)] <= 0 :
+	if timedActionRemainingDuration > 0: #do not start performing an action if something else is doing the
+		return
+	
+	if timedActionCooldown[timedActionNumber.find(desiredAction)] <= 0:
 		#perform action
 		var index = timedActionNumber.find(desiredAction)
 		currentAction = desiredAction
