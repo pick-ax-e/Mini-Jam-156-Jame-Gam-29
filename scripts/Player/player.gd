@@ -11,8 +11,10 @@ var animatedSprite: AnimatedSprite2D
 var animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
 var animationNames = ["RunDown","RunLeft","RunRight","RunUp"]
 
+var currentAction: int = 0 # 0 for idle, 1 for run, 2 for attck 1, this var is used for using the right animation
+
 func _ready():
-	Singleton.player_node = get_tree().get_first_node_in_group("player")
+	Singleton.player_node = self
 	animatedSprite = $AnimatedSprite2D
 
 func _physics_process(delta):
@@ -21,7 +23,14 @@ func _physics_process(delta):
 	handlePlayerAnimations()
 
 func handlePlayerAnimations():
-	#find the correct animation to use
+	if currentAction != 2:
+		if wishDir.length() == 0:
+			currentAction = 0
+		else:
+			currentAction = 1
+	
+	
+	#find the correct animation to use FOR RUNNING
 	var bestFit: Vector2 = Vector2.ZERO
 	for dir in animationsDir:
 		if dir.dot(wishDir) > bestFit.dot(wishDir):
