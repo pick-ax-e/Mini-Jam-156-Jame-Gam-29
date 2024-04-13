@@ -1149,6 +1149,7 @@ navigation_layer_0/layers = 1
 sources/2 = SubResource("TileSetAtlasSource_fvth2")
 
 [node name="Map" type="TileMap"]
+z_index = -1
 y_sort_enabled = true
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_k0kme")
