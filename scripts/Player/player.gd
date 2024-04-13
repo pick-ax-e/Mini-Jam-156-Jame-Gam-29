@@ -20,6 +20,7 @@ var timedActionNumber =         [2,3]   #refers to action number
 var timedActionDuration =       [0.25,1]#in secconds
 var timedActionDefaultCooldown =[0.25,2]
 var timedActionCooldown =       [0,0]
+var timedActionRemainingDuration = 0
 
 func _ready():
 	Singleton.player_node = self
@@ -45,7 +46,15 @@ func handleTimedActions(delta):
 		if timedActionCooldown[i] > 0:          #I CANT BELIEVE IM SAYING THIS BUT I ACTUALLY MISS JAVA
 			timedActionCooldown[i]-=delta       #TAKE ME HOME COUNTR TORAAAD TO HE PLACE WHWER BLENONNGGG WEST VERTINGA
 	
+	if timedActionRemainingDuration >= 0:
+		timedActionRemainingDuration -= delta
 	
+	if timedActionCooldown[timedActionNumber.find(desiredAction)] <= 0 :
+		#perform action
+		var index = timedActionNumber.find(desiredAction)
+		currentAction = desiredAction
+		timedActionCooldown[index] = timedActionDefaultCooldown[index]
+		timedActionRemainingDuration = timedActionDuration[index]
 	
 		
 
