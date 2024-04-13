@@ -11,9 +11,16 @@ func _ready():
 	Singleton.player_node = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta):
+	handlePlayerAttacks()
 	handlePlayerMovement()
+	handlePlayerAnimations()
+
+func handlePlayerAnimations
 	
+
+func handlePlayerAttacks
 	
+
 func handlePlayerMovement():
 	wishDir.x = Input.get_axis("moveLeft","moveRight")
 	wishDir.y = Input.get_axis("moveForward","moveBack")
@@ -25,11 +32,12 @@ func handlePlayerMovement():
 	else:
 		#calculate multiplier to make things more responsive in opisite directions
 		var multi = (wishDir * -1).dot( velocity.normalized() ) + 1.0
-		multi *= responsivenessMultiplier
-		multi +=1
-		print(multi)
+		multi = (multi * responsivenessMultiplier) + 1
 		velocity += wishDir * accel * multi
 		
 	velocity *= friction
+	
+	
+	#now figure out rotation of the player
 	move_and_slide()
 	
