@@ -12,8 +12,8 @@ func _process(delta):
 
 func update():
 	var time_left = int(Singleton.time_left)
-	var minutes = int(time_left / 60)
-	var seconds = int(time_left % 60)
+	var minutes = floor(time_left / 60)
+	var seconds = floor(time_left % 60)
 	
 	var minutes_str = str(minutes)
 	var seconds_str = str(seconds)
