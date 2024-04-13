@@ -1,5 +1,7 @@
 extends Node
 
+signal reset_signal
+
 @onready var timer
 @onready var player_node
 @onready var time_left
@@ -18,7 +20,7 @@ func _process(delta):
 
 func _on_timer_timeout():
 	reset()
-	emit_signal("Reset")
+	reset_signal.emit()
 
 func reset():
 	#play time loop animation here
