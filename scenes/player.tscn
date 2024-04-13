@@ -172,7 +172,7 @@ script = ExtResource("1_8721r")
 shape = SubResource("CircleShape2D_u3b3p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(6.425, 6.425)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_1ptev")
 animation = &"IdleUp"
 autoplay = "RunUp"
