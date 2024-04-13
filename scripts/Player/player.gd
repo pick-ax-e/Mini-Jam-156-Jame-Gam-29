@@ -9,7 +9,7 @@ var wishDir: Vector2 = Vector2.ZERO
 var animatedSprite: AnimatedSprite2D
 
 var animationsDir = [Vector2.DOWN,Vector2.LEFT,Vector2.RIGHT,Vector2.UP] #lists the desired wishDir that fits the animation best
-
+var animationNames = ["RunDown","RunLeft","RunRight","RunUp"]
 
 func _ready():
 	Singleton.player_node = get_tree().get_first_node_in_group("player")
@@ -27,6 +27,7 @@ func handlePlayerAnimations():
 		if dir.dot(wishDir) > bestFit.dot(wishDir):
 			bestFit = dir
 	
+	animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
 	
 	
 
