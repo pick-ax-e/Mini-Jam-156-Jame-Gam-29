@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://btcncnm8lyjnm"]
+[gd_scene load_steps=6 format=3 uid="uid://btcncnm8lyjnm"]
 
-[ext_resource type="PackedScene" uid="uid://dpqu4xqu1txpw" path="res://scenes/player.tscn" id="1_w3ncm"]
+[ext_resource type="PackedScene" uid="uid://d26nxoa5ym6p8" path="res://scenes/player.tscn" id="1_w3ncm"]
 [ext_resource type="PackedScene" uid="uid://hik6w44brocv" path="res://scenes/map.tscn" id="2_glwhr"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_region.gd" id="3_046bj"]
 [ext_resource type="PackedScene" uid="uid://ce5gsclhrc62b" path="res://scenes/enemy.tscn" id="3_ygrr7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_66kvv"]
+radius = 1000.0
+height = 2000.0
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -12,5 +17,22 @@ position = Vector2(61, -95)
 
 [node name="Map" parent="." instance=ExtResource("2_glwhr")]
 
-[node name="Enemy" parent="." instance=ExtResource("3_ygrr7")]
-position = Vector2(14, 227)
+[node name="enemy_region_1" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_046bj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_region_1"]
+shape = SubResource("CapsuleShape2D_66kvv")
+
+[node name="Enemy" parent="enemy_region_1" instance=ExtResource("3_ygrr7")]
+position = Vector2(-469, -435)
+
+[node name="Enemy2" parent="enemy_region_1" instance=ExtResource("3_ygrr7")]
+position = Vector2(-636, 223)
+
+[node name="Enemy3" parent="enemy_region_1" instance=ExtResource("3_ygrr7")]
+position = Vector2(392, 492)
+
+[node name="Enemy4" parent="enemy_region_1" instance=ExtResource("3_ygrr7")]
+position = Vector2(-198, 547)

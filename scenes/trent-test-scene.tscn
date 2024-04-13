@@ -17,11 +17,10 @@ position = Vector2(-2, -239)
 
 [node name="Map" parent="." instance=ExtResource("2_jj82g")]
 
-[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("enemies")]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("3_gadcp")
-enemies = [NodePath("Enemy")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_sr1yj")
