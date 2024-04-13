@@ -19,6 +19,10 @@ config/icon="res://resources/icon.svg"
 
 Singleton="*res://scripts/singleton.gd"
 
+[dotnet]
+
+project/assembly_name="Mini Jam 156 Jame Gam 29"
+
 [layer_names]
 
 2d_physics/layer_1="Ground"
