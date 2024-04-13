@@ -18,18 +18,8 @@ var current_charge_time = 0
 var attack_direction: Vector2
 var charge_position: Vector2
 
-# Basic enemy that moves/pathfinds towards the player
-# when in range, lunges towards the player?
-
-# Move/pathfind towards the plater
-func _movement(delta: float):	
-	if is_attacking:
-		return
-	
-	if global_position.distance_to(player.global_position) <= range:
-		return
-		
-	move_and_collide(position.direction_to(player.position) * speed * delta)
+func _set_movement_target():
+	navigation_agent.target_position = player.global_position
 
 func _cancel_attack():
 	attack_state = AttackState.NONE
@@ -38,14 +28,10 @@ func _cancel_attack():
 
 # Basic enemy can attack if it is within x units of the player
 func _can_attack() -> bool:
-	var player = Singleton.player_node
-	
 	return global_position.distance_to(player.global_position) <= range && !is_attacking
 
 # charges up lunge, then captures the direction to the player and lunges towards them
 func _do_attack(delta: float):
-	var player = Singleton.player_node
-	
 	match attack_state:
 		AttackState.NONE:
 			attack_direction = global_position.direction_to(player.global_position)
