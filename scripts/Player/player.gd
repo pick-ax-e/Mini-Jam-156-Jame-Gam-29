@@ -25,7 +25,7 @@ var timedActionNumber =         [2,3]   #refers to action number
 var timedActionDuration =       [0.25,1]#in secconds
 var timedActionDefaultCooldown =[0.25,2]
 var timedActionCooldown =       [0,0]
-var timedActionAnimationName =  ["null","null"]
+var timedActionAnimationPosition =  [3,4] #represents the index * stride
 var timedActionRemainingDuration = 0
 
 func _ready():
@@ -40,6 +40,9 @@ func _physics_process(delta):
 	
 func handleTimedActions(delta):
 	# map inputs to action
+	if currentAction >= 2 && timedActionRemainingDuration <= 0:
+		currentAction = 0 #finnish 
+
 	var desiredAction: int = -1
 	if Input.is_action_pressed("attack1"):
 		desiredAction = timedActionNumber[0]
@@ -70,31 +73,28 @@ func handleTimedActions(delta):
 
 
 func handlePlayerAnimations():
-	if currentAction != 2:
+	if currentAction <= 1:
 		if wishDir.length() == 0:
 			currentAction = 0
 		else:
 			currentAction = 1
 	
 	#THERE IS NO SWITCH STATEMENT IN THIS GOD AWFUL LANGUAGE>?>???? LORD HAVE MERCY GET ME OUT
-	
-	
-	if currentAction == 0:
-		animatedSprite.animation = animationNames[animationsDir.find(prevDir) + animationStride]
-	elif currentAction == 1:
-	#find the correct animation to use FOR RUNNING
-		var bestFit: Vector2 = Vector2.ZERO
-		for dir in animationsDir:
-			if dir.dot(wishDir) > bestFit.dot(wishDir):
-				bestFit = dir
-	
-		animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
-		prevDir = bestFit
-	
-	
-
-#func handlePlayerAttacks():
-	
+	#nevermind theres match, match deez??? deee
+	match currentAction:
+		0:
+			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + animationStride]
+		1:
+			var bestFit: Vector2 = Vector2.ZERO
+			for dir in animationsDir:
+				if dir.dot(wishDir) > bestFit.dot(wishDir):
+					bestFit = dir
+			animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
+			prevDir = bestFit
+		2:
+			animatedSprite.animation = "Placeholder"
+		3:
+			animatedSprite.animation = "Placeholder"
 
 func handlePlayerMovement():
 	wishDir.x = Input.get_axis("move_left","move_right")
