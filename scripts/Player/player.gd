@@ -11,9 +11,10 @@ func hit_player(damage):
 
 var resetting:bool = false
 
-func reset(): #oh my god IT DOESNT SUPPORT STRUCTS EITHER
+func reset(): #oh my god gds DOESNT SUPPORT STRUCTS EITHER
 	resetting = true
 	velocity = Vector2.ZERO
+	animatedSprite.modulate = Color(1,1,1,0.5)
 
 # above are intended for public use
 var healthOverTime:Array = []
@@ -47,30 +48,44 @@ var timedActionRemainingDuration = 0
 const dashMaintain = 100
 const dashImpulse = 1500
 
+const resetTimeScale = 0.5 #negetive time scale in godot is weird, so i have avoided using it after testing
+
 func _ready():
 	Singleton.player_node = self
 	animatedSprite = $AnimatedSprite2D
 	particles = $CPUParticles2D
-
-func _process(delta):
-	if resetting:
-		handleResetting()
+	posOverTime.append(position)
+	healthOverTime.append(player_health)
 
 func _physics_process(delta):
 	if resetting:
+		Engine.time_scale = resetTimeScale
+		handleResetting()
 		return
 	handleTimedActions(delta)
 	handlePlayerMovement()
 	handlePlayerAnimations()
+	
+	if Input.is_action_pressed("SECRET_TEST_BUTTON_SHHH_TELL_NOBODY"):
+		hit_player(10)
+	if player_health <= 0:
+		player_health = 0
+		reset()
+	
+	if Engine.time_scale != 1:
+		Engine.time_scale = 1
+	
 	posOverTime.append(position)
 	healthOverTime.append(player_health)
 	
 func handleResetting():
 	if posOverTime.size() < 1:
 		resetting = false
+		animatedSprite.modulate = Color(1,1,1,1)
+		Singleton.reset()
 		return
-	var pos = posOverTime.pop_front()
-	var hlth = healthOverTime.pop_front()
+	var pos = posOverTime.pop_back()
+	var hlth = healthOverTime.pop_back()
 	
 	player_health = hlth
 	position = pos
