@@ -1,7 +1,13 @@
 class_name Player extends CharacterBody2D
 var player_health = 100
 func hit_player(damage):
-	print("not implimented yet, will probs add a stun or smth")
+	print("player hit")
+	currentAction = 4 #stun action
+	var index = timedActionNumber.find(currentAction)
+	timedActionCooldown[index] = timedActionDefaultCooldown[index]
+	timedActionRemainingDuration = timedActionDuration[index]
+	
+	player_health -= damage
 # above are intended for public use
 
 
@@ -21,11 +27,11 @@ var currentAction: int = 0 # 0 for idle, 1 for run, further actions are timedAct
 var prevDir: Vector2 = Vector2.UP #used for determining idle directions
 
 #timed action system, used for attacks and possibly dashes/dodges in the future
-const timedActionNumber =         [2,3]   #refers to action number
-const timedActionDuration =       [0.25,1]#in secconds
-const timedActionDefaultCooldown =[1,2]
-const timedActionAnimationPosition =  [3,4] #represents the index * stride
-var timedActionCooldown =       [0,0]
+const timedActionNumber =         [2,3,4]   #refers to action number
+const timedActionDuration =       [0.25,1,0.25]#in secconds
+const timedActionDefaultCooldown =[1,2,0]
+const timedActionAnimationPosition =  [3,4,5] #represents the index * stride
+var timedActionCooldown =       [0,0,0]
 var timedActionRemainingDuration = 0
 
 func _ready():
@@ -73,9 +79,6 @@ func handleTimedActions(delta):
 		currentAction = desiredAction
 		timedActionCooldown[index] = timedActionDefaultCooldown[index]
 		timedActionRemainingDuration = timedActionDuration[index]
-	
-		
-
 
 
 func handlePlayerAnimations():
@@ -87,6 +90,7 @@ func handlePlayerAnimations():
 	
 	#THERE IS NO SWITCH STATEMENT IN THIS GOD AWFUL LANGUAGE>?>???? LORD HAVE MERCY GET ME OUT
 	#nevermind theres match, match deez??? deee
+	animatedSprite.modulate = Color.WHITE
 	match currentAction:
 		0:
 			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + animationStride]
@@ -101,6 +105,8 @@ func handlePlayerAnimations():
 			animatedSprite.animation = "Placeholder"
 		3:
 			animatedSprite.animation = "Placeholder"
+		4:
+			animatedSprite.modulate = Color.RED
 
 func handlePlayerMovement():
 	wishDir.x = Input.get_axis("move_left","move_right")
