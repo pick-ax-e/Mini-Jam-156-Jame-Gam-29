@@ -17,3 +17,7 @@ config/icon="res://resources/icon.svg"
 [autoload]
 
 Singleton="*res://scripts/singleton.gd"
+
+[layer_names]
+
+2d_physics/layer_2="Enemies"
