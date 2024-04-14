@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_so68r"]
 [ext_resource type="PackedScene" uid="uid://btcncnm8lyjnm" path="res://scenes/main.tscn" id="2_8wyd6"]
-[ext_resource type="AudioStream" uid="uid://dckwhm5xhotaj" path="res://resources/audio/Hidden_artefact.wav" id="3_f673q"]
+[ext_resource type="AudioStream" uid="uid://n1hlifqlba82" path="res://resources/audio/Artifact_1.wav" id="3_0dtjm"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -54,7 +54,7 @@ grow_vertical = 0
 text = "Press any key to continue"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_f673q")
+stream = ExtResource("3_0dtjm")
 autoplay = true
 bus = &"BGM"
 

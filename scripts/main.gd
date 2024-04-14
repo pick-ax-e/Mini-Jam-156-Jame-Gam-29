@@ -12,4 +12,4 @@ func _process(delta):
 
 
 func _on_bgm_player_finished():
-	$AudioStreamPlayer.play()
+	$BGMPlayer.play()

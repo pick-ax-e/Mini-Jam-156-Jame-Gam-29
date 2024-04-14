@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://btcncnm8lyjnm"]
+[gd_scene load_steps=8 format=3 uid="uid://btcncnm8lyjnm"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_73tdu"]
 [ext_resource type="PackedScene" uid="uid://d26nxoa5ym6p8" path="res://scenes/player.tscn" id="1_w3ncm"]
 [ext_resource type="PackedScene" uid="uid://hik6w44brocv" path="res://scenes/map.tscn" id="2_glwhr"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_region.gd" id="3_046bj"]
 [ext_resource type="PackedScene" uid="uid://ce5gsclhrc62b" path="res://scenes/enemy.tscn" id="3_ygrr7"]
+[ext_resource type="AudioStream" uid="uid://d0mb3s6sorw1m" path="res://resources/audio/Artifact_2.wav" id="6_8u420"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_66kvv"]
 radius = 1000.0
@@ -40,6 +41,7 @@ position = Vector2(392, 492)
 position = Vector2(-198, 547)
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_8u420")
 autoplay = true
 bus = &"BGM"
 
