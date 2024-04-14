@@ -355,17 +355,15 @@ color_ramp = SubResource("Gradient_ij68b")
 
 [node name="WeaponParticles1" type="CPUParticles2D" parent="AnimatedSprite2D/particle affects"]
 position = Vector2(0, -23.385)
-emitting = false
 amount = 81
-one_shot = true
 explosiveness = 0.99
 fract_delta = false
 texture = SubResource("GradientTexture1D_b5qoh")
 direction = Vector2(0, -1)
 spread = 60.48
 gravity = Vector2(0, 0)
-initial_velocity_min = 32.25
-initial_velocity_max = 32.25
+initial_velocity_min = 250.0
+initial_velocity_max = 250.0
 radial_accel_min = 9.21
 radial_accel_max = 13.51
 angle_min = 720.0

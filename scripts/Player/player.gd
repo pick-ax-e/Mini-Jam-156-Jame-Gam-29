@@ -166,6 +166,7 @@ func handleTimedActions(delta):
 			velocity = wishDir*dashImpulse
 		2: 
 			weaponParticles1.emitting = true
+			weaponParticles1.direction = prevDir
 
 
 func handlePlayerAnimations():
