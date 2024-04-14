@@ -1,10 +1,11 @@
-[gd_scene load_steps=44 format=3 uid="uid://d26nxoa5ym6p8"]
+[gd_scene load_steps=43 format=3 uid="uid://d26nxoa5ym6p8"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_8721r"]
 [ext_resource type="Texture2D" uid="uid://dwh00xnapdk6" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Mushroom_man_character_sheet.png" id="2_lxd3l"]
 [ext_resource type="Texture2D" uid="uid://g8p54gqk44gn" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Mushroom_microphone_attack.png" id="2_twqum"]
 [ext_resource type="Texture2D" uid="uid://o1d8hl6yy4xf" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="3_6od3l"]
 [ext_resource type="PackedScene" uid="uid://dqch1a4oqpfvh" path="res://scenes/user_interface.tscn" id="3_ecxld"]
+[ext_resource type="Texture2D" uid="uid://dbra3fuqi6fvf" path="res://resources/Other/Circle.png" id="5_0swrd"]
 [ext_resource type="Script" path="res://scripts/Player/Hitbox.gd" id="5_agxan"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u3b3p"]
@@ -294,14 +295,6 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.0933333, 0.806667, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 
-[sub_resource type="Gradient" id="Gradient_5x8m8"]
-offsets = PackedFloat32Array(0, 0.503817, 1)
-colors = PackedColorArray(0.85098, 0.85098, 0.85098, 0, 1, 1, 1, 1, 0.309804, 0.309804, 0.309804, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_b5qoh"]
-gradient = SubResource("Gradient_5x8m8")
-width = 12
-
 [sub_resource type="Gradient" id="Gradient_y737t"]
 offsets = PackedFloat32Array(0.755396, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -355,23 +348,22 @@ color_ramp = SubResource("Gradient_ij68b")
 
 [node name="WeaponParticles1" type="CPUParticles2D" parent="AnimatedSprite2D/particle affects"]
 position = Vector2(0, -23.385)
-emitting = false
 amount = 81
-one_shot = true
+lifetime = 0.5
 explosiveness = 0.99
 fract_delta = false
-texture = SubResource("GradientTexture1D_b5qoh")
+texture = ExtResource("5_0swrd")
 direction = Vector2(0, -1)
 spread = 60.48
 gravity = Vector2(0, 0)
-initial_velocity_min = 32.25
-initial_velocity_max = 32.25
+initial_velocity_min = 125.0
+initial_velocity_max = 125.0
 radial_accel_min = 9.21
 radial_accel_max = 13.51
 angle_min = 720.0
 angle_max = 720.0
-scale_amount_min = 2.0
-scale_amount_max = 2.0
+scale_amount_min = 0.03
+scale_amount_max = 0.03
 color_ramp = SubResource("Gradient_y737t")
 
 [node name="Camera2D" type="Camera2D" parent="."]
