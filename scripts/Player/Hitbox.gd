@@ -6,8 +6,6 @@ func updateRot(vec2Dir:Vector2):
 
 func tickHitbox(damage):
 	var hits = collision_result
-	print("hit size")
-	print(hits.size())
 	for hit in hits:
 		if hit is Enemy:
 			print("fella has been hit")

@@ -22,10 +22,6 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("2_ptebc")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2rc6i"]
-atlas = ExtResource("2_ptebc")
-region = Rect2(16, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_xa3p6"]
 atlas = ExtResource("2_ptebc")
 region = Rect2(0, 16, 16, 16)
@@ -41,6 +37,10 @@ region = Rect2(32, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_slu2t"]
 atlas = ExtResource("2_ptebc")
 region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rc6i"]
+atlas = ExtResource("2_ptebc")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p4je5"]
 animations = [{
@@ -162,38 +162,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2rc6i")
-}],
-"loop": true,
-"name": &"recharge_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2rc6i")
-}],
-"loop": true,
-"name": &"recharge_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2rc6i")
-}],
-"loop": true,
-"name": &"recharge_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2rc6i")
-}],
-"loop": true,
-"name": &"recharge_up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_xa3p6")
 }, {
 "duration": 1.0,
@@ -259,16 +227,52 @@ animations = [{
 "loop": true,
 "name": &"run_up",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rc6i")
+}],
+"loop": true,
+"name": &"stun_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rc6i")
+}],
+"loop": true,
+"name": &"stun_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rc6i")
+}],
+"loop": true,
+"name": &"stun_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rc6i")
+}],
+"loop": true,
+"name": &"stun_up",
+"speed": 5.0
 }]
 
-[node name="BasicEnemy" type="CharacterBody2D"]
+[node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 2
-motion_mode = 1
+gravity_scale = 0.0
+linear_damp = 8.0
 script = ExtResource("1_6jdg1")
+lunge_time = 0.5
+lunge_speed = 4000.0
 type = "Basic"
 health = 10.0
 attack_damage = 10.0
-speed = 500.0
+speed = 250.0
+stun_duration = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rs0qx")
@@ -282,7 +286,7 @@ debug_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_p4je5")
-animation = &"charge_down"
+animation = &"stun_left"
 
 [node name="hp" type="Control" parent="."]
 layout_mode = 3
@@ -330,5 +334,8 @@ color = Color(0.960784, 0.396078, 0.396078, 1)
 
 [node name="targetting_timer" type="Timer" parent="."]
 
+[node name="stun_timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="targetting_timer" to="." method="_on_targetting_timer_timeout"]
+[connection signal="timeout" from="stun_timer" to="." method="_on_stun_timer_timeout"]
