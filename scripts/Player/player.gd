@@ -37,7 +37,7 @@ var posOverTime: Array = []
 var particles: CPUParticles2D
 
 const accel = 40
-const friction = 0.925
+const friction = 0.9125
 const noInputFriction = 0.8
 const responsivenessMultiplier = 3
 
@@ -166,7 +166,8 @@ func handleTimedActions(delta):
 			velocity = wishDir*dashImpulse
 		2: 
 			weaponParticles1.emitting = true
-			weaponParticles1.direction = prevDir
+			weaponParticles1.direction = wishDir
+			weaponHitbox.updateRot(wishDir)
 
 
 func handlePlayerAnimations():
