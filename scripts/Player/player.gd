@@ -185,13 +185,13 @@ func handlePlayerAnimations():
 			animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
 			prevDir = bestFit
 		2:
-			animatedSprite.animation = "Placeholder" #attack
 			weaponHitbox.updateRot(prevDir)
 			weaponHitbox.tickHitbox(weaponDamage)
 			
 			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + (animationStride * 2)] 
+			animatedSprite.play( animationNames[animationsDir.find(prevDir) + (animationStride * 2)] )
+			
 		3:
-			animatedSprite.animation = "Placeholder" # dash
 			if wishDir != Vector2.ZERO:
 				velocity += wishDir * dashMaintain
 		4:

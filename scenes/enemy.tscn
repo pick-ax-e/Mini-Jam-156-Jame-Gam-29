@@ -266,13 +266,10 @@ collision_layer = 2
 gravity_scale = 0.0
 linear_damp = 8.0
 script = ExtResource("1_6jdg1")
-lunge_time = 0.5
-lunge_speed = 4000.0
 type = "Basic"
 health = 10.0
 attack_damage = 10.0
 speed = 250.0
-stun_duration = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rs0qx")
