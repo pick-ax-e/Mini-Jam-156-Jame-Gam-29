@@ -6,7 +6,6 @@ extends RigidBody2D
 @export var health: float
 @export var attack_damage: float
 @export var speed: float
-@export var stun_duration: float
 
 @onready var health_bar: ColorRect = $hp/fill
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
