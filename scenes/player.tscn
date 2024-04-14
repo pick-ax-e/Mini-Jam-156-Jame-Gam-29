@@ -1,14 +1,16 @@
-[gd_scene load_steps=41 format=3 uid="uid://d26nxoa5ym6p8"]
+[gd_scene load_steps=43 format=3 uid="uid://d26nxoa5ym6p8"]
 
 [ext_resource type="Script" path="res://scripts/Player/player.gd" id="1_8721r"]
 [ext_resource type="Texture2D" uid="uid://dwh00xnapdk6" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Mushroom_man_character_sheet.png" id="2_lxd3l"]
 [ext_resource type="Texture2D" uid="uid://g8p54gqk44gn" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Mushroom_microphone_attack.png" id="2_twqum"]
 [ext_resource type="Texture2D" uid="uid://o1d8hl6yy4xf" path="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Free Cow Sprites.png" id="3_6od3l"]
 [ext_resource type="PackedScene" uid="uid://dqch1a4oqpfvh" path="res://scenes/user_interface.tscn" id="3_ecxld"]
+[ext_resource type="Texture2D" uid="uid://dbra3fuqi6fvf" path="res://resources/Other/Circle.png" id="5_0swrd"]
 [ext_resource type="Script" path="res://scripts/Player/Hitbox.gd" id="5_agxan"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u3b3p"]
-radius = 63.2851
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otm6s"]
+radius = 25.0
+height = 80.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tlkk8"]
 atlas = ExtResource("2_twqum")
@@ -132,7 +134,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tlkk8")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_bm3jn")
 }],
 "loop": true,
@@ -143,7 +145,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8fult")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_ks73a")
 }],
 "loop": true,
@@ -154,7 +156,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q3rvs")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_fkdqe")
 }],
 "loop": true,
@@ -165,7 +167,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r26gv")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_lxcqd")
 }],
 "loop": true,
@@ -294,9 +296,13 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.0933333, 0.806667, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 
+[sub_resource type="Gradient" id="Gradient_y737t"]
+offsets = PackedFloat32Array(0.755396, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_61p66"]
-radius = 28.72
-height = 76.58
+radius = 57.7
+height = 115.4
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -305,15 +311,19 @@ motion_mode = 1
 script = ExtResource("1_8721r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_u3b3p")
+position = Vector2(0, -7.17)
+shape = SubResource("CapsuleShape2D_otm6s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_1ptev")
-animation = &"AttackDown"
+animation = &"AttackUp"
 autoplay = "IdleDown"
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+[node name="particle affects" type="Node2D" parent="AnimatedSprite2D"]
+show_behind_parent = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D/particle affects"]
 show_behind_parent = true
 z_as_relative = false
 position = Vector2(0, 4.25)
@@ -325,7 +335,7 @@ speed_scale = 2.94
 randomness = 1.0
 lifetime_randomness = 0.4
 emission_shape = 3
-emission_rect_extents = Vector2(15.32, 2.765)
+emission_rect_extents = Vector2(10, 1.96)
 spread = 180.0
 gravity = Vector2(0, -1.775)
 initial_velocity_max = 10.95
@@ -338,6 +348,24 @@ scale_amount_max = 9.5
 scale_amount_curve = SubResource("Curve_uuo0b")
 color_ramp = SubResource("Gradient_ij68b")
 
+[node name="WeaponParticles1" type="CPUParticles2D" parent="AnimatedSprite2D/particle affects"]
+position = Vector2(0, -0.5)
+emitting = false
+amount = 81
+lifetime = 0.25
+one_shot = true
+explosiveness = 0.99
+fract_delta = false
+texture = ExtResource("5_0swrd")
+direction = Vector2(0, -1)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_amount_min = 0.03
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_y737t")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
@@ -346,6 +374,7 @@ position_smoothing_enabled = true
 [node name="UI" parent="Camera2D/CanvasLayer" instance=ExtResource("3_ecxld")]
 
 [node name="Hitbox1" type="ShapeCast2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_61p66")
 target_position = Vector2(0, 100)
 max_results = 64

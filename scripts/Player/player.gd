@@ -37,7 +37,7 @@ var posOverTime: Array = []
 var particles: CPUParticles2D
 
 const accel = 40
-const friction = 0.925
+const friction = 0.9125
 const noInputFriction = 0.8
 const responsivenessMultiplier = 3
 
@@ -68,6 +68,7 @@ var initialResetSize = 0
 
 var weaponHitbox: player_hitbox
 const weaponDamage = 30
+var weaponParticles1: CPUParticles2D
 
 func _ready():
 	Singleton.player_node = self
@@ -76,7 +77,7 @@ func _ready():
 	posOverTime.append(position)
 	healthOverTime.append(player_health)
 	weaponHitbox = get_child(3) #get weapon hitbox, idk $ would not work i hate this
-
+	weaponParticles1 = $"AnimatedSprite2D/particle affects/WeaponParticles1"
 
 
 func _physics_process(delta):
@@ -163,6 +164,10 @@ func handleTimedActions(delta):
 	match currentAction:
 		3:
 			velocity = wishDir*dashImpulse
+		2: 
+			weaponParticles1.emitting = true
+			weaponParticles1.direction = wishDir
+			weaponHitbox.updateRot(wishDir)
 
 
 func handlePlayerAnimations():
@@ -185,13 +190,13 @@ func handlePlayerAnimations():
 			animatedSprite.animation = animationNames[animationsDir.find(bestFit)]
 			prevDir = bestFit
 		2:
-			animatedSprite.animation = "Placeholder" #attack
 			weaponHitbox.updateRot(prevDir)
 			weaponHitbox.tickHitbox(weaponDamage)
 			
 			animatedSprite.animation = animationNames[animationsDir.find(prevDir) + (animationStride * 2)] 
+			animatedSprite.play( animationNames[animationsDir.find(prevDir) + (animationStride * 2)] )
+			
 		3:
-			animatedSprite.animation = "Placeholder" # dash
 			if wishDir != Vector2.ZERO:
 				velocity += wishDir * dashMaintain
 		4:

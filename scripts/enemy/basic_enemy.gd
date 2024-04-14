@@ -23,9 +23,14 @@ const STATE_ANIMATION_MAP = {
 @export_category("Attack Settings")
 @export var attack_range = 250
 @export var charge_time: float = 0.5
-@export var lunge_time: float = 0.25
+@export var lunge_time: float = 0.5
 @export var recharge_time: float = 1
-@export var lunge_speed: float = 2000
+@export var lunge_speed: float = 4000
+
+@export_category("Take Damage Settings")
+@export var stun_duration: float = 1
+@export var knockback_duration: float = 0.1
+@export var knockback_strength: float = 1000
 
 var attack_direction: Vector2
 var charge_position: Vector2
@@ -84,7 +89,7 @@ func _can_attack() -> bool:
 	return is_in_range && !is_attacking && correct_state 
 
 # charges up lunge, then captures the direction to the player and lunges towards them
-func _do_attack(delta: float):
+func _do_attack(_delta: float):
 	match state:
 		State.IDLE | State.MOVING:
 			_use_navigation = false
@@ -132,10 +137,10 @@ func take_damage(damage: float):
 	_use_navigation = false
 	
 	state = State.KNOCKED_BACK
-	stun_timer.start(0.1)
+	stun_timer.start(knockback_duration)
 	
 	damage_direction = player.global_position.direction_to(global_position)
-	apply_central_impulse(damage_direction * 1000)
+	apply_central_impulse(damage_direction * knockback_strength)
 	
 	# TODO: Damage flash
 	

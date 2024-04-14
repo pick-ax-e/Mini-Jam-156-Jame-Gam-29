@@ -17,3 +17,7 @@ func _input(event):
 		if event.pressed:
 			Singleton.timer.start(300)
 			get_tree().change_scene_to_packed(game)
+
+
+func _on_audio_stream_player_finished():
+	$AudioStreamPlayer.play()

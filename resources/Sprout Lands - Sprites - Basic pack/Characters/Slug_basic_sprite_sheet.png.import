@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7nvih8x255pn"
-path="res://.godot/imported/Mushroom_fall_back_LR.png-d4980ed81542130ff07296dbafb13d3c.ctex"
+uid="uid://b3hbepyp8htwv"
+path="res://.godot/imported/Slug_basic_sprite_sheet.png-87de9f1b760663f56fe46712d61f9331.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Mushroom_fall_back_LR.png"
-dest_files=["res://.godot/imported/Mushroom_fall_back_LR.png-d4980ed81542130ff07296dbafb13d3c.ctex"]
+source_file="res://resources/Sprout Lands - Sprites - Basic pack/Characters/Slug_basic_sprite_sheet.png"
+dest_files=["res://.godot/imported/Slug_basic_sprite_sheet.png-87de9f1b760663f56fe46712d61f9331.ctex"]
 
 [params]
 
