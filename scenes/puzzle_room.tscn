@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr5y35crbwxyw"]
+
+[ext_resource type="TileSet" uid="uid://bvx4tpn7c2mxi" path="res://resources/tilesets/main_tile_set.tres" id="1_o0tw2"]
+
+[node name="PuzzleRoom" type="TileMap"]
+tile_set = ExtResource("1_o0tw2")
+format = 2
