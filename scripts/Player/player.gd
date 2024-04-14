@@ -68,6 +68,7 @@ var initialResetSize = 0
 
 var weaponHitbox: player_hitbox
 const weaponDamage = 30
+var weaponParticles1: CPUParticles2D
 
 func _ready():
 	Singleton.player_node = self
@@ -76,7 +77,7 @@ func _ready():
 	posOverTime.append(position)
 	healthOverTime.append(player_health)
 	weaponHitbox = get_child(3) #get weapon hitbox, idk $ would not work i hate this
-
+	weaponParticles1 = $"AnimatedSprite2D/particle affects/WeaponParticles1"
 
 
 func _physics_process(delta):
@@ -163,6 +164,8 @@ func handleTimedActions(delta):
 	match currentAction:
 		3:
 			velocity = wishDir*dashImpulse
+		2: 
+			weaponParticles1.emitting = true
 
 
 func handlePlayerAnimations():
