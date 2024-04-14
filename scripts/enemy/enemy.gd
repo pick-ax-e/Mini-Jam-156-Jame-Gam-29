@@ -1,22 +1,22 @@
 class_name Enemy
-extends CharacterBody2D
-
-enum State { IDLE, ACTIVE }
+extends RigidBody2D
 
 @export_category("Enemy Settings")
 @export var type: String
 @export var health: float
 @export var attack_damage: float
 @export var speed: float
+@export var stun_duration: float
 
 @onready var health_bar: ColorRect = $hp/fill
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var start_position = global_position
 @onready var max_health = health
 
-var state = State.IDLE
+var is_agroed = false
 var is_attacking = false
 var target_position: Vector2
+var _use_navigation = true
 
 func _ready():
 	set_physics_process(false)
@@ -32,9 +32,11 @@ func _nav_ready(_rid):
 
 func _process(_delta: float) -> void:
 	health_bar.scale = Vector2(clampf(health / max_health, 0, 1), 1)
+	if Input.is_action_just_pressed("attack1"):
+		take_damage(1)
 
 func _physics_process(delta: float):
-	if state == State.IDLE:
+	if not is_agroed:
 		if is_attacking:
 			_cancel_attack()
 		
@@ -44,7 +46,7 @@ func _physics_process(delta: float):
 	
 	move_to_target(delta)
 	
-	if state == State.IDLE:
+	if not is_agroed:
 		return
 	
 	if _can_attack():
@@ -55,8 +57,9 @@ func _physics_process(delta: float):
 
 # Handles the movement of an enemy
 func move_to_target(_delta: float):
-	if navigation_agent.is_navigation_finished() || is_attacking:
-		navigation_agent.velocity = Vector2.ZERO
+	navigation_agent.velocity = linear_velocity
+	
+	if navigation_agent.is_navigation_finished() || !_use_navigation:
 		return
 		
 	var target = navigation_agent.get_next_path_position()
@@ -68,8 +71,8 @@ func move_to_target(_delta: float):
 		_on_velocity_computed(new_velocity)
 
 func _on_velocity_computed(safe_velocity: Vector2):
-	velocity = safe_velocity
-	move_and_slide()
+	if _use_navigation:
+		linear_velocity = safe_velocity
 
 func _set_movement_target():
 	pass
@@ -85,5 +88,8 @@ func _can_attack() -> bool:
 func _do_attack(_delta: float) -> void:
 	pass
 
-func take_damage(_damage: float):
+func take_damage(damage: float):
+	pass
+
+func _on_death():
 	pass
