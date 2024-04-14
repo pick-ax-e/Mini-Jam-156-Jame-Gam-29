@@ -28,8 +28,8 @@ func _physics_process(_delta: float) -> void:
 		
 		is_active = true
 		for enemy in enemies:
-			enemy.state = Enemy.State.ACTIVE
+			enemy.is_agroed = true
 	else:
 		is_active = false
 		for enemy in enemies:
-			enemy.state = Enemy.State.IDLE
+			enemy.is_agroed = false
